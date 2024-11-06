@@ -47,9 +47,12 @@ emcc pacman.c -o pacman.html
 
 👥 Contribuidores
 
-•	Enzo Tenani - LIDER 
-• Nicolas Laredd
+•Enzo Tenani - LIDER 
+
+• Nicolas Laredo
+
 • Bernardo Atadia 
+
 • Guilhermo Amadio 
 	
 
