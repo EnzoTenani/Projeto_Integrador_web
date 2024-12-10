@@ -11,7 +11,6 @@ O objetivo deste projeto é criar uma plataforma web para hospedar clássicos do
 🚀 Tecnologias Utilizadas
 
 	•	Linguagem C: Programação dos jogos clássicos.
-	•	WebAssembly (Wasm): Conversão dos jogos em C para execução na web.
 	•	JavaScript: Integração do Wasm com a interface web.
 	•	HTML/CSS: Criação da interface do site.
 	•	Git: Controle de versão para colaboração.
