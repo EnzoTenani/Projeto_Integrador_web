@@ -1543,7 +1543,7 @@ function createExportWrapper(name, fixedasm) {
 }
 
 var wasmBinaryFile;
-  wasmBinaryFile = 'snake.wasm';
+  wasmBinaryFile = 'Tetris.wasm';
   if (!isDataURI(wasmBinaryFile)) {
     wasmBinaryFile = locateFile(wasmBinaryFile);
   }
@@ -1720,51 +1720,59 @@ var tempI64;
 // === Body ===
 
 var ASM_CONSTS = {
-  26624: function($0, $1) {localStorage.setItem($0, $1);},  
- 26658: function($0) {var value = localStorage.getItem($0); return value ? parseInt(value) : 0;},  
- 26736: function() {if (document.fullscreenElement) return 1;},  
- 26782: function() {return document.getElementById('canvas').width;},  
- 26834: function() {return parseInt(document.getElementById('canvas').style.width);},  
- 26902: function() {document.exitFullscreen();},  
- 26929: function() {setTimeout(function() { Module.requestFullscreen(false, false); }, 100);},  
- 27002: function() {if (document.fullscreenElement) return 1;},  
- 27048: function() {return document.getElementById('canvas').width;},  
- 27100: function() {return screen.width;},  
- 27125: function() {document.exitFullscreen();},  
- 27152: function() {setTimeout(function() { Module.requestFullscreen(false, true); setTimeout(function() { canvas.style.width="unset"; }, 100); }, 100);},  
- 27285: function() {return window.innerWidth;},  
- 27311: function() {return window.innerHeight;},  
- 27338: function() {if (document.fullscreenElement) return 1;},  
- 27384: function() {return document.getElementById('canvas').width;},  
- 27436: function() {return parseInt(document.getElementById('canvas').style.width);},  
- 27504: function() {if (document.fullscreenElement) return 1;},  
- 27550: function() {return document.getElementById('canvas').width;},  
- 27602: function() {return screen.width;},  
- 27627: function() {return window.innerWidth;},  
- 27653: function() {return window.innerHeight;},  
- 27680: function() {if (document.fullscreenElement) return 1;},  
- 27726: function() {return document.getElementById('canvas').width;},  
- 27778: function() {return screen.width;},  
- 27803: function() {document.exitFullscreen();},  
- 27830: function() {if (document.fullscreenElement) return 1;},  
- 27876: function() {return document.getElementById('canvas').width;},  
- 27928: function() {return parseInt(document.getElementById('canvas').style.width);},  
- 27996: function() {document.exitFullscreen();},  
- 28023: function($0) {document.getElementById('canvas').style.opacity = $0;},  
- 28081: function() {return screen.width;},  
- 28106: function() {return screen.height;},  
- 28132: function() {return window.screenX;},  
- 28159: function() {return window.screenY;},  
- 28186: function() {return window.devicePixelRatio;},  
- 28222: function($0) {navigator.clipboard.writeText(UTF8ToString($0));},  
- 28275: function($0) {document.getElementById("canvas").style.cursor = UTF8ToString($0);},  
- 28346: function() {document.getElementById('canvas').style.cursor = 'none';},  
- 28403: function($0, $1, $2, $3) {try { navigator.getGamepads()[$0].vibrationActuator.playEffect('dual-rumble', { startDelay: 0, duration: $3, weakMagnitude: $1, strongMagnitude: $2 }); } catch (e) { try { navigator.getGamepads()[$0].hapticActuators[0].pulse($2, $3); } catch (e) { } }},  
- 28659: function($0) {document.getElementById('canvas').style.cursor = UTF8ToString($0);},  
- 28730: function() {if (document.fullscreenElement) return 1;},  
- 28776: function() {return window.innerWidth;},  
- 28802: function() {return window.innerHeight;},  
- 28829: function() {if (document.pointerLockElement) return 1;}
+  56220: function($0, $1, $2, $3, $4) {if (typeof window === 'undefined' || (window.AudioContext || window.webkitAudioContext) === undefined) { return 0; } if (typeof(window.miniaudio) === 'undefined') { window.miniaudio = { referenceCount: 0 }; window.miniaudio.device_type = {}; window.miniaudio.device_type.playback = $0; window.miniaudio.device_type.capture = $1; window.miniaudio.device_type.duplex = $2; window.miniaudio.device_state = {}; window.miniaudio.device_state.stopped = $3; window.miniaudio.device_state.started = $4; miniaudio.devices = []; miniaudio.track_device = function(device) { for (var iDevice = 0; iDevice < miniaudio.devices.length; ++iDevice) { if (miniaudio.devices[iDevice] == null) { miniaudio.devices[iDevice] = device; return iDevice; } } miniaudio.devices.push(device); return miniaudio.devices.length - 1; }; miniaudio.untrack_device_by_index = function(deviceIndex) { miniaudio.devices[deviceIndex] = null; while (miniaudio.devices.length > 0) { if (miniaudio.devices[miniaudio.devices.length-1] == null) { miniaudio.devices.pop(); } else { break; } } }; miniaudio.untrack_device = function(device) { for (var iDevice = 0; iDevice < miniaudio.devices.length; ++iDevice) { if (miniaudio.devices[iDevice] == device) { return miniaudio.untrack_device_by_index(iDevice); } } }; miniaudio.get_device_by_index = function(deviceIndex) { return miniaudio.devices[deviceIndex]; }; miniaudio.unlock_event_types = (function(){ return ['touchend', 'click']; })(); miniaudio.unlock = function() { for(var i = 0; i < miniaudio.devices.length; ++i) { var device = miniaudio.devices[i]; if (device != null && device.webaudio != null && device.state === window.miniaudio.device_state.started) { device.webaudio.resume().then(() => { Module._ma_device__on_notification_unlocked(device.pDevice); }, (error) => {console.error("Failed to resume audiocontext", error); }); } } miniaudio.unlock_event_types.map(function(event_type) { document.removeEventListener(event_type, miniaudio.unlock, true); }); }; miniaudio.unlock_event_types.map(function(event_type) { document.addEventListener(event_type, miniaudio.unlock, true); }); } window.miniaudio.referenceCount += 1; return 1;},  
+ 58378: function() {if (typeof(window.miniaudio) !== 'undefined') { window.miniaudio.referenceCount -= 1; if (window.miniaudio.referenceCount === 0) { delete window.miniaudio; } }},  
+ 58542: function() {return (navigator.mediaDevices !== undefined && navigator.mediaDevices.getUserMedia !== undefined);},  
+ 58646: function() {try { var temp = new (window.AudioContext || window.webkitAudioContext)(); var sampleRate = temp.sampleRate; temp.close(); return sampleRate; } catch(e) { return 0; }},  
+ 58817: function($0, $1, $2, $3, $4, $5) {var deviceType = $0; var channels = $1; var sampleRate = $2; var bufferSize = $3; var pIntermediaryBuffer = $4; var pDevice = $5; if (typeof(window.miniaudio) === 'undefined') { return -1; } var device = {}; var audioContextOptions = {}; if (deviceType == window.miniaudio.device_type.playback && sampleRate != 0) { audioContextOptions.sampleRate = sampleRate; } device.webaudio = new (window.AudioContext || window.webkitAudioContext)(audioContextOptions); device.webaudio.suspend(); device.state = window.miniaudio.device_state.stopped; var channelCountIn = 0; var channelCountOut = channels; if (deviceType != window.miniaudio.device_type.playback) { channelCountIn = channels; } device.scriptNode = device.webaudio.createScriptProcessor(bufferSize, channelCountIn, channelCountOut); device.scriptNode.onaudioprocess = function(e) { if (device.intermediaryBufferView == null || device.intermediaryBufferView.length == 0) { device.intermediaryBufferView = new Float32Array(Module.HEAPF32.buffer, pIntermediaryBuffer, bufferSize * channels); } if (deviceType == miniaudio.device_type.capture || deviceType == miniaudio.device_type.duplex) { for (var iChannel = 0; iChannel < channels; iChannel += 1) { var inputBuffer = e.inputBuffer.getChannelData(iChannel); var intermediaryBuffer = device.intermediaryBufferView; for (var iFrame = 0; iFrame < bufferSize; iFrame += 1) { intermediaryBuffer[iFrame*channels + iChannel] = inputBuffer[iFrame]; } } _ma_device_process_pcm_frames_capture__webaudio(pDevice, bufferSize, pIntermediaryBuffer); } if (deviceType == miniaudio.device_type.playback || deviceType == miniaudio.device_type.duplex) { _ma_device_process_pcm_frames_playback__webaudio(pDevice, bufferSize, pIntermediaryBuffer); for (var iChannel = 0; iChannel < e.outputBuffer.numberOfChannels; ++iChannel) { var outputBuffer = e.outputBuffer.getChannelData(iChannel); var intermediaryBuffer = device.intermediaryBufferView; for (var iFrame = 0; iFrame < bufferSize; iFrame += 1) { outputBuffer[iFrame] = intermediaryBuffer[iFrame*channels + iChannel]; } } } else { for (var iChannel = 0; iChannel < e.outputBuffer.numberOfChannels; ++iChannel) { e.outputBuffer.getChannelData(iChannel).fill(0.0); } } }; if (deviceType == miniaudio.device_type.capture || deviceType == miniaudio.device_type.duplex) { navigator.mediaDevices.getUserMedia({audio:true, video:false}) .then(function(stream) { device.streamNode = device.webaudio.createMediaStreamSource(stream); device.streamNode.connect(device.scriptNode); device.scriptNode.connect(device.webaudio.destination); }) .catch(function(error) { console.log("Failed to get user media: " + error); }); } if (deviceType == miniaudio.device_type.playback) { device.scriptNode.connect(device.webaudio.destination); } device.pDevice = pDevice; return miniaudio.track_device(device);},  
+ 61645: function($0) {return miniaudio.get_device_by_index($0).webaudio.sampleRate;},  
+ 61711: function($0) {var device = miniaudio.get_device_by_index($0); if (device.scriptNode !== undefined) { device.scriptNode.onaudioprocess = function(e) {}; device.scriptNode.disconnect(); device.scriptNode = undefined; } if (device.streamNode !== undefined) { device.streamNode.disconnect(); device.streamNode = undefined; } device.webaudio.close(); device.webaudio = undefined; device.pDevice = undefined;},  
+ 62104: function($0) {miniaudio.untrack_device_by_index($0);},  
+ 62147: function($0) {var device = miniaudio.get_device_by_index($0); device.webaudio.resume(); device.state = miniaudio.device_state.started;},  
+ 62272: function($0) {var device = miniaudio.get_device_by_index($0); device.webaudio.suspend(); device.state = miniaudio.device_state.stopped;},  
+ 62398: function() {if (document.fullscreenElement) return 1;},  
+ 62444: function() {return document.getElementById('canvas').width;},  
+ 62496: function() {return parseInt(document.getElementById('canvas').style.width);},  
+ 62564: function() {document.exitFullscreen();},  
+ 62591: function() {setTimeout(function() { Module.requestFullscreen(false, false); }, 100);},  
+ 62664: function() {if (document.fullscreenElement) return 1;},  
+ 62710: function() {return document.getElementById('canvas').width;},  
+ 62762: function() {return screen.width;},  
+ 62787: function() {document.exitFullscreen();},  
+ 62814: function() {setTimeout(function() { Module.requestFullscreen(false, true); setTimeout(function() { canvas.style.width="unset"; }, 100); }, 100);},  
+ 62947: function() {return window.innerWidth;},  
+ 62973: function() {return window.innerHeight;},  
+ 63000: function() {if (document.fullscreenElement) return 1;},  
+ 63046: function() {return document.getElementById('canvas').width;},  
+ 63098: function() {return parseInt(document.getElementById('canvas').style.width);},  
+ 63166: function() {if (document.fullscreenElement) return 1;},  
+ 63212: function() {return document.getElementById('canvas').width;},  
+ 63264: function() {return screen.width;},  
+ 63289: function() {return window.innerWidth;},  
+ 63315: function() {return window.innerHeight;},  
+ 63342: function() {if (document.fullscreenElement) return 1;},  
+ 63388: function() {return document.getElementById('canvas').width;},  
+ 63440: function() {return screen.width;},  
+ 63465: function() {document.exitFullscreen();},  
+ 63492: function() {if (document.fullscreenElement) return 1;},  
+ 63538: function() {return document.getElementById('canvas').width;},  
+ 63590: function() {return parseInt(document.getElementById('canvas').style.width);},  
+ 63658: function() {document.exitFullscreen();},  
+ 63685: function($0) {document.getElementById('canvas').style.opacity = $0;},  
+ 63743: function() {return screen.width;},  
+ 63768: function() {return screen.height;},  
+ 63794: function() {return window.screenX;},  
+ 63821: function() {return window.screenY;},  
+ 63848: function() {return window.devicePixelRatio;},  
+ 63884: function($0) {navigator.clipboard.writeText(UTF8ToString($0));},  
+ 63937: function($0) {document.getElementById("canvas").style.cursor = UTF8ToString($0);},  
+ 64008: function() {document.getElementById('canvas').style.cursor = 'none';},  
+ 64065: function($0, $1, $2, $3) {try { navigator.getGamepads()[$0].vibrationActuator.playEffect('dual-rumble', { startDelay: 0, duration: $3, weakMagnitude: $1, strongMagnitude: $2 }); } catch (e) { try { navigator.getGamepads()[$0].hapticActuators[0].pulse($2, $3); } catch (e) { } }},  
+ 64321: function($0) {document.getElementById('canvas').style.cursor = UTF8ToString($0);},  
+ 64392: function() {if (document.fullscreenElement) return 1;},  
+ 64438: function() {return window.innerWidth;},  
+ 64464: function() {return window.innerHeight;},  
+ 64491: function() {if (document.pointerLockElement) return 1;}
 };
 
 
@@ -1862,6 +1870,89 @@ var ASM_CONSTS = {
       var js = jsStackTrace();
       if (Module['extraStackTrace']) js += '\n' + Module['extraStackTrace']();
       return demangleAll(js);
+    }
+
+  function ___cxa_allocate_exception(size) {
+      // Thrown object is prepended by exception metadata block
+      return _malloc(size + 16) + 16;
+    }
+
+  /** @constructor */
+  function ExceptionInfo(excPtr) {
+      this.excPtr = excPtr;
+      this.ptr = excPtr - 16;
+  
+      this.set_type = function(type) {
+        HEAP32[(((this.ptr)+(4))>>2)] = type;
+      };
+  
+      this.get_type = function() {
+        return HEAP32[(((this.ptr)+(4))>>2)];
+      };
+  
+      this.set_destructor = function(destructor) {
+        HEAP32[(((this.ptr)+(8))>>2)] = destructor;
+      };
+  
+      this.get_destructor = function() {
+        return HEAP32[(((this.ptr)+(8))>>2)];
+      };
+  
+      this.set_refcount = function(refcount) {
+        HEAP32[((this.ptr)>>2)] = refcount;
+      };
+  
+      this.set_caught = function (caught) {
+        caught = caught ? 1 : 0;
+        HEAP8[(((this.ptr)+(12))>>0)] = caught;
+      };
+  
+      this.get_caught = function () {
+        return HEAP8[(((this.ptr)+(12))>>0)] != 0;
+      };
+  
+      this.set_rethrown = function (rethrown) {
+        rethrown = rethrown ? 1 : 0;
+        HEAP8[(((this.ptr)+(13))>>0)] = rethrown;
+      };
+  
+      this.get_rethrown = function () {
+        return HEAP8[(((this.ptr)+(13))>>0)] != 0;
+      };
+  
+      // Initialize native structure fields. Should be called once after allocated.
+      this.init = function(type, destructor) {
+        this.set_type(type);
+        this.set_destructor(destructor);
+        this.set_refcount(0);
+        this.set_caught(false);
+        this.set_rethrown(false);
+      }
+  
+      this.add_ref = function() {
+        var value = HEAP32[((this.ptr)>>2)];
+        HEAP32[((this.ptr)>>2)] = value + 1;
+      };
+  
+      // Returns true if last reference released.
+      this.release_ref = function() {
+        var prev = HEAP32[((this.ptr)>>2)];
+        HEAP32[((this.ptr)>>2)] = prev - 1;
+        assert(prev > 0);
+        return prev === 1;
+      };
+    }
+  
+  var exceptionLast = 0;
+  
+  var uncaughtExceptionCount = 0;
+  function ___cxa_throw(ptr, type, destructor) {
+      var info = new ExceptionInfo(ptr);
+      // Initialize ExceptionInfo content after it was allocated in __cxa_allocate_exception.
+      info.init(type, destructor);
+      exceptionLast = ptr;
+      uncaughtExceptionCount++;
+      throw ptr + " - Exception catching is disabled, this exception cannot be caught. Compile with -s NO_DISABLE_EXCEPTION_CATCHING or -s EXCEPTION_CATCHING_ALLOWED=[..] to catch.";
     }
 
   var PATH = {splitPath:function(filename) {
@@ -7524,16 +7615,6 @@ var ASM_CONSTS = {
       GLctx.bindBuffer(target, GL.buffers[buffer]);
     }
 
-  function _glBindFramebuffer(target, framebuffer) {
-  
-      GLctx.bindFramebuffer(target, GL.framebuffers[framebuffer]);
-  
-    }
-
-  function _glBindRenderbuffer(target, renderbuffer) {
-      GLctx.bindRenderbuffer(target, GL.renderbuffers[renderbuffer]);
-    }
-
   function _glBindTexture(target, texture) {
       GLctx.bindTexture(target, GL.textures[texture]);
     }
@@ -7550,8 +7631,6 @@ var ASM_CONSTS = {
   function _glBufferSubData(target, offset, size, data) {
       GLctx.bufferSubData(target, offset, HEAPU8.subarray(data, data+size));
     }
-
-  function _glCheckFramebufferStatus(x0) { return GLctx['checkFramebufferStatus'](x0) }
 
   function _glClear(x0) { GLctx['clear'](x0) }
 
@@ -7604,17 +7683,6 @@ var ASM_CONSTS = {
       }
     }
 
-  function _glDeleteFramebuffers(n, framebuffers) {
-      for (var i = 0; i < n; ++i) {
-        var id = HEAP32[(((framebuffers)+(i*4))>>2)];
-        var framebuffer = GL.framebuffers[id];
-        if (!framebuffer) continue; // GL spec: "glDeleteFramebuffers silently ignores 0s and names that do not correspond to existing framebuffer objects".
-        GLctx.deleteFramebuffer(framebuffer);
-        framebuffer.name = 0;
-        GL.framebuffers[id] = null;
-      }
-    }
-
   function _glDeleteProgram(id) {
       if (!id) return;
       var program = GL.programs[id];
@@ -7625,17 +7693,6 @@ var ASM_CONSTS = {
       GLctx.deleteProgram(program);
       program.name = 0;
       GL.programs[id] = null;
-    }
-
-  function _glDeleteRenderbuffers(n, renderbuffers) {
-      for (var i = 0; i < n; i++) {
-        var id = HEAP32[(((renderbuffers)+(i*4))>>2)];
-        var renderbuffer = GL.renderbuffers[id];
-        if (!renderbuffer) continue; // GL spec: "glDeleteRenderbuffers silently ignores 0s and names that do not correspond to existing renderbuffer objects".
-        GLctx.deleteRenderbuffer(renderbuffer);
-        renderbuffer.name = 0;
-        GL.renderbuffers[id] = null;
-      }
     }
 
   function _glDeleteShader(id) {
@@ -7690,30 +7747,10 @@ var ASM_CONSTS = {
       GLctx.enableVertexAttribArray(index);
     }
 
-  function _glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer) {
-      GLctx.framebufferRenderbuffer(target, attachment, renderbuffertarget,
-                                         GL.renderbuffers[renderbuffer]);
-    }
-
-  function _glFramebufferTexture2D(target, attachment, textarget, texture, level) {
-      GLctx.framebufferTexture2D(target, attachment, textarget,
-                                      GL.textures[texture], level);
-    }
-
   function _glFrontFace(x0) { GLctx['frontFace'](x0) }
 
   function _glGenBuffers(n, buffers) {
       __glGenObject(n, buffers, 'createBuffer', GL.buffers
-        );
-    }
-
-  function _glGenFramebuffers(n, ids) {
-      __glGenObject(n, ids, 'createFramebuffer', GL.framebuffers
-        );
-    }
-
-  function _glGenRenderbuffers(n, renderbuffers) {
-      __glGenObject(n, renderbuffers, 'createRenderbuffer', GL.renderbuffers
         );
     }
 
@@ -7728,15 +7765,6 @@ var ASM_CONSTS = {
 
   function _glGetFloatv(name_, p) {
       emscriptenWebGLGet(name_, p, 2);
-    }
-
-  function _glGetFramebufferAttachmentParameteriv(target, attachment, pname, params) {
-      var result = GLctx.getFramebufferAttachmentParameter(target, attachment, pname);
-      if (result instanceof WebGLRenderbuffer ||
-          result instanceof WebGLTexture) {
-        result = result.name | 0;
-      }
-      HEAP32[((params)>>2)] = result;
     }
 
   function _glGetProgramInfoLog(program, maxLength, length, infoLog) {
@@ -7941,8 +7969,6 @@ var ASM_CONSTS = {
       GLctx.readPixels(x, y, width, height, format, type, pixelData);
     }
 
-  function _glRenderbufferStorage(x0, x1, x2, x3) { GLctx['renderbufferStorage'](x0, x1, x2, x3) }
-
   function _glShaderSource(shader, count, string, length) {
       var source = GL.getSource(shader, count, string, length);
   
@@ -7952,8 +7978,6 @@ var ASM_CONSTS = {
   function _glTexImage2D(target, level, internalFormat, width, height, border, format, type, pixels) {
       GLctx.texImage2D(target, level, internalFormat, width, height, border, format, type, pixels ? emscriptenWebGLGetTexPixelData(type, format, width, height, pixels, internalFormat) : null);
     }
-
-  function _glTexParameterf(x0, x1, x2) { GLctx['texParameterf'](x0, x1, x2) }
 
   function _glTexParameteri(x0, x1, x2) { GLctx['texParameteri'](x0, x1, x2) }
 
@@ -9390,6 +9414,8 @@ function checkIncomingModuleAPI() {
   ignoredModuleProp('fetchSettings');
 }
 var asmLibraryArg = {
+  "__cxa_allocate_exception": ___cxa_allocate_exception,
+  "__cxa_throw": ___cxa_throw,
   "__syscall_faccessat": ___syscall_faccessat,
   "__syscall_fcntl64": ___syscall_fcntl64,
   "__syscall_getcwd": ___syscall_getcwd,
@@ -9590,13 +9616,10 @@ var asmLibraryArg = {
   "glAttachShader": _glAttachShader,
   "glBindAttribLocation": _glBindAttribLocation,
   "glBindBuffer": _glBindBuffer,
-  "glBindFramebuffer": _glBindFramebuffer,
-  "glBindRenderbuffer": _glBindRenderbuffer,
   "glBindTexture": _glBindTexture,
   "glBlendFunc": _glBlendFunc,
   "glBufferData": _glBufferData,
   "glBufferSubData": _glBufferSubData,
-  "glCheckFramebufferStatus": _glCheckFramebufferStatus,
   "glClear": _glClear,
   "glClearColor": _glClearColor,
   "glClearDepthf": _glClearDepthf,
@@ -9606,9 +9629,7 @@ var asmLibraryArg = {
   "glCreateShader": _glCreateShader,
   "glCullFace": _glCullFace,
   "glDeleteBuffers": _glDeleteBuffers,
-  "glDeleteFramebuffers": _glDeleteFramebuffers,
   "glDeleteProgram": _glDeleteProgram,
-  "glDeleteRenderbuffers": _glDeleteRenderbuffers,
   "glDeleteShader": _glDeleteShader,
   "glDeleteTextures": _glDeleteTextures,
   "glDepthFunc": _glDepthFunc,
@@ -9619,16 +9640,11 @@ var asmLibraryArg = {
   "glDrawElements": _glDrawElements,
   "glEnable": _glEnable,
   "glEnableVertexAttribArray": _glEnableVertexAttribArray,
-  "glFramebufferRenderbuffer": _glFramebufferRenderbuffer,
-  "glFramebufferTexture2D": _glFramebufferTexture2D,
   "glFrontFace": _glFrontFace,
   "glGenBuffers": _glGenBuffers,
-  "glGenFramebuffers": _glGenFramebuffers,
-  "glGenRenderbuffers": _glGenRenderbuffers,
   "glGenTextures": _glGenTextures,
   "glGetAttribLocation": _glGetAttribLocation,
   "glGetFloatv": _glGetFloatv,
-  "glGetFramebufferAttachmentParameteriv": _glGetFramebufferAttachmentParameteriv,
   "glGetProgramInfoLog": _glGetProgramInfoLog,
   "glGetProgramiv": _glGetProgramiv,
   "glGetShaderInfoLog": _glGetShaderInfoLog,
@@ -9638,10 +9654,8 @@ var asmLibraryArg = {
   "glLinkProgram": _glLinkProgram,
   "glPixelStorei": _glPixelStorei,
   "glReadPixels": _glReadPixels,
-  "glRenderbufferStorage": _glRenderbufferStorage,
   "glShaderSource": _glShaderSource,
   "glTexImage2D": _glTexImage2D,
-  "glTexParameterf": _glTexParameterf,
   "glTexParameteri": _glTexParameteri,
   "glUniform1i": _glUniform1i,
   "glUniform4f": _glUniform4f,
@@ -9684,13 +9698,28 @@ var ___wasm_call_ctors = Module["___wasm_call_ctors"] = createExportWrapper("__w
 var _main = Module["_main"] = createExportWrapper("main");
 
 /** @type {function(...*):?} */
+var _ma_device__on_notification_unlocked = Module["_ma_device__on_notification_unlocked"] = createExportWrapper("ma_device__on_notification_unlocked");
+
+/** @type {function(...*):?} */
+var _ma_malloc_emscripten = Module["_ma_malloc_emscripten"] = createExportWrapper("ma_malloc_emscripten");
+
+/** @type {function(...*):?} */
+var _ma_free_emscripten = Module["_ma_free_emscripten"] = createExportWrapper("ma_free_emscripten");
+
+/** @type {function(...*):?} */
+var _ma_device_process_pcm_frames_capture__webaudio = Module["_ma_device_process_pcm_frames_capture__webaudio"] = createExportWrapper("ma_device_process_pcm_frames_capture__webaudio");
+
+/** @type {function(...*):?} */
+var _ma_device_process_pcm_frames_playback__webaudio = Module["_ma_device_process_pcm_frames_playback__webaudio"] = createExportWrapper("ma_device_process_pcm_frames_playback__webaudio");
+
+/** @type {function(...*):?} */
 var _malloc = Module["_malloc"] = createExportWrapper("malloc");
 
 /** @type {function(...*):?} */
-var _free = Module["_free"] = createExportWrapper("free");
+var ___errno_location = Module["___errno_location"] = createExportWrapper("__errno_location");
 
 /** @type {function(...*):?} */
-var ___errno_location = Module["___errno_location"] = createExportWrapper("__errno_location");
+var _free = Module["_free"] = createExportWrapper("free");
 
 /** @type {function(...*):?} */
 var ___stdio_exit = Module["___stdio_exit"] = createExportWrapper("__stdio_exit");
@@ -9736,25 +9765,40 @@ var stackRestore = Module["stackRestore"] = createExportWrapper("stackRestore");
 var stackAlloc = Module["stackAlloc"] = createExportWrapper("stackAlloc");
 
 /** @type {function(...*):?} */
+var dynCall_ii = Module["dynCall_ii"] = createExportWrapper("dynCall_ii");
+
+/** @type {function(...*):?} */
 var dynCall_vii = Module["dynCall_vii"] = createExportWrapper("dynCall_vii");
 
 /** @type {function(...*):?} */
-var dynCall_viii = Module["dynCall_viii"] = createExportWrapper("dynCall_viii");
+var dynCall_iiii = Module["dynCall_iiii"] = createExportWrapper("dynCall_iiii");
 
 /** @type {function(...*):?} */
-var dynCall_viiiii = Module["dynCall_viiiii"] = createExportWrapper("dynCall_viiiii");
+var dynCall_iii = Module["dynCall_iii"] = createExportWrapper("dynCall_iii");
+
+/** @type {function(...*):?} */
+var dynCall_iiiii = Module["dynCall_iiiii"] = createExportWrapper("dynCall_iiiii");
 
 /** @type {function(...*):?} */
 var dynCall_viiii = Module["dynCall_viiii"] = createExportWrapper("dynCall_viiii");
 
 /** @type {function(...*):?} */
+var dynCall_iiiji = Module["dynCall_iiiji"] = createExportWrapper("dynCall_iiiji");
+
+/** @type {function(...*):?} */
+var dynCall_iiiiiii = Module["dynCall_iiiiiii"] = createExportWrapper("dynCall_iiiiiii");
+
+/** @type {function(...*):?} */
+var dynCall_viii = Module["dynCall_viii"] = createExportWrapper("dynCall_viii");
+
+/** @type {function(...*):?} */
+var dynCall_jii = Module["dynCall_jii"] = createExportWrapper("dynCall_jii");
+
+/** @type {function(...*):?} */
+var dynCall_viiiii = Module["dynCall_viiiii"] = createExportWrapper("dynCall_viiiii");
+
+/** @type {function(...*):?} */
 var dynCall_vidd = Module["dynCall_vidd"] = createExportWrapper("dynCall_vidd");
-
-/** @type {function(...*):?} */
-var dynCall_ii = Module["dynCall_ii"] = createExportWrapper("dynCall_ii");
-
-/** @type {function(...*):?} */
-var dynCall_iiii = Module["dynCall_iiii"] = createExportWrapper("dynCall_iiii");
 
 /** @type {function(...*):?} */
 var dynCall_vi = Module["dynCall_vi"] = createExportWrapper("dynCall_vi");
@@ -9782,9 +9826,6 @@ var dynCall_v = Module["dynCall_v"] = createExportWrapper("dynCall_v");
 
 /** @type {function(...*):?} */
 var dynCall_viiiiiii = Module["dynCall_viiiiiii"] = createExportWrapper("dynCall_viiiiiii");
-
-/** @type {function(...*):?} */
-var dynCall_iii = Module["dynCall_iii"] = createExportWrapper("dynCall_iii");
 
 /** @type {function(...*):?} */
 var dynCall_vfi = Module["dynCall_vfi"] = createExportWrapper("dynCall_vfi");
