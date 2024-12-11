@@ -25,7 +25,7 @@
 
 # Define required raylib variables
 PROJECT_NAME       ?= game
-RAYLIB_VERSION     ?= 4.5.0
+RAYLIB_VERSION     ?= 4.2.0
 RAYLIB_PATH        ?= ..\..
 
 # Define compiler path on Windows
@@ -197,7 +197,7 @@ endif
 CFLAGS += -Wall -std=c++14 -D_DEFAULT_SOURCE -Wno-missing-braces
 
 ifeq ($(BUILD_MODE),DEBUG)
-    CFLAGS += -g -O0
+    CFLAGS += -g -O3
 else
     CFLAGS += -s -O1
 endif
