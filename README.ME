@@ -1,0 +1,55 @@
+
+
+🎮 Projeto Integrador - Site de Jogos em WebAssembly
+
+Este repositório contém o projeto do site de jogos, desenvolvido como parte das disciplinas de Desenvolvimento de Sistemas Web e Organização de Computadores na Pontifícia Universidade Católica de Campinas (PUCC).
+
+📜 Descrição do Projeto
+
+O objetivo deste projeto é criar uma plataforma web para hospedar clássicos dos jogos, como Cobrinha e Tetris, originalmente desenvolvidos em C++ e posteriormente convertidos para WebAssembly (Wasm). Este projeto integrador permite explorar as intersecções entre o desenvolvimento web e os conceitos de organização de computadores, oferecendo uma aplicação prática e interativa para os conteúdos estudados.
+
+🚀 Tecnologias Utilizadas
+
+	•	Linguagem C++: Programação dos jogos clássicos com conhecimento em linguagem orientada a objetos.
+	•	JavaScript: Integração do Wasm com a interface web.
+	•	HTML/CSS: Criação da interface do site.
+	•	Git: Controle de versão para colaboração.
+
+🎯 Funcionalidades
+
+	•	Jogos em feitos em C++ rodando nativamente no browser.
+	•	Interface simples e amigável.
+	•	Compatível com diferentes navegadores.
+
+📝 Instalação e Execução
+
+	1.	Clone este repositório:
+
+git clone https://github.com/seu-usuario/seu-repositorio.git
+
+
+	2.	Compile os jogos para WebAssembly usando o Emscripten:
+Entre em cada uma das pastas e de o respectivo comando:
+emcc main.cpp src/engine.cpp src/game.cpp src/mainmenu.cpp -o snake.html -Isrc/include -Iraylib/src -Lraylib/build/raylib -lraylib -s USE_GLFW=3 -s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s INITIAL_MEMORY=64MB -s MAXIMUM_MEMORY=512MB
+emcc main.cpp -o pong.html -I./raylib/include -L./raylib/lib -lraylib   -DPLATFORM_WEB --shell-file ./raylib/src/shell_minimal.html   -s ASYNCIFY=1 -s USE_GLFW=3 -s WASM=1 -s TOTAL_MEMORY=64MB
+emcc main.cpp position.cpp grid.cpp game.cpp colors.cpp blocks.cpp block.cpp -o Tetris.html -Isrc/include -Iraylib/src -Lraylib/build/raylib -lraylib -s USE_GLFW=3 -s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s INITIAL_MEMORY=64MB -s MAXIMUM_MEMORY=512MB -s ASYNCIFY
+
+
+	3.	Abra os arquivos .html no navegador.
+python3 -m http.server 8080
+
+👥 Contribuidores
+
+•Enzo Tenani - LIDER 
+
+• Nicolas Laredo
+
+• Bernardo Atadia 
+
+• Guillermo Amadio 
+	
+
+📚 Créditos
+
+Este projeto foi desenvolvido como parte das atividades práticas das disciplinas Desenvolvimento de Sistemas Web e Organização de Computadores na PUCC.
+
